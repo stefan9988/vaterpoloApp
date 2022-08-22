@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <title>tabela</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- <script src="https://smtpjs.com/v3/smtp.js"></script>   -->
+    </head>
+    <body>
+        <h1>Water polo App</h1>
+        <div class="div-inline">
+            <img src="resources\icons\icon-512.png" alt="water polo img" >
+            <fieldset>
+                <legend>Which team got the ball:</legend>
+                <div>
+                <div>
+                    <input type="radio" name="tim" id="cbtim1" checked>
+                    <label for="tim1" id="cbltim1">Tim 1</label><br>
+                    <input type="radio" name="tim" value=2 id="cbtim2">
+                    <label for="tim2" id="cbltim2">Tim 2</label><br>
+                    <input type="text" placeholder="player 1" id="inppl1">
+                    <input type="text" placeholder="player 2" id="inppl2">
+                </div>
+                <div>
+                    <input type="radio" name="q" id="cbq1" checked>
+                    <label for="q">Q1</label><br>
+                    <input type="radio" name="q" id="cbq2">
+                    <label for="q">Q2</label><br>
+                    <input type="radio" name="q" id="cbq3">
+                    <label for="q">Q3</label><br>
+                    <input type="radio" name="q" id="cbq4">
+                    <label for="q">Q4</label><br>
+                </div>
+                <input type="submit" value="Save" onclick="submitSave()">
+            </div>
+                <!-- <input type="submit" value="Save"> -->
+              </fieldset>
+              <div><button id="btnBp" onclick="btnBpClicked()">Swim speed</button></div>
+        </div>
+        <!-- <form method="post">
+            <input type="button" value="Send Email" onclick="sendEmail()"/>
+        </form>  -->
+        <div class="div-inline">
+            <button id="btnLoadFile" onclick="loadFromFile()">Load from file</button>
+            <button id="btnCreateFile" onclick="createNewGame()">Create new game</button>
+            
+        <div id="dd">
+            <p id=timer>08:00</p>
+            <button id="btnStart" onclick="btnStartClicked()">Start</button>
+            <button id="btnStop" onclick="btnStopClicked()">Stop</button>
+            <button id="btnRestart" onclick="btnRestartClicked()">Restart</button>
+            <!-- <input type="text" id="inpSpeed"> -->
+        </div>
+        <div class="wrapper">
+            <input type=text placeholder="Enter team 1 name" id="inputt1" class="inv">
+            <!-- <div id="d">
+                <p id=timer1>00:30</p>
+                <button id="btnStart1" onclick="btnStart1Clicked()">Start</button>
+                <button id="btnStop1" onclick="btnStop1Clicked()">Stop</button>
+                <button id="btnRestart1" onclick="btnRestart1Clicked()">Restart</button>
+                <button id="" onclick="btnBp1Clicked()">Start 20</button>
+            </div> -->
+            <button id="btnTim1" onclick="btn1clicked()" class="btnTim">Team 1</button>
+            <button id="btnTim2" onclick="btn2clicked()" class="btnTim">Team 2</button>
+            <!-- <div id="d">
+                <p id=timer2>00:30</p>
+                <button id="btnStart2" onclick="btnStart2Clicked()">Start</button>
+                <button id="btnStop2" onclick="btnStop2Clicked()">Stop</button>
+                <button id="btnRestart2" onclick="btnRestart2Clicked()">Restart</button>
+                <button id="" onclick="btnBp2Clicked()">Start 20</button>
+            </div> -->
+            <input type=text placeholder="Enter team 2 name" id="inputt2" class="inv">
+        </div>
+        <div class="wrapper">
+        <button id="btnNext1" onclick="next1()">Next</button>
+        <div>
+            <table id="tblplnum1"></table>
+            <table id="tblplnum2"></table>
+        </div>
+        <button id="btnNext2" onclick="next2()">Next</button>
+    </div>
+        
+        <table id="tblTim1" class="tblCenter">
+            <thead>
+                <tr class="trc">
+                    <th>Number</th>
+                    <th>Goals</th>
+                    <th>Assists</th>
+                    <th>Ejection drawn</th>
+                    <th>MVP score</th>
+                    <th>In game</th>
+                </tr>
+            </thead>
+
+            <tbody id="tblDataTim1">
+                
+            </tbody>
+        </table>
+        <table id="tblTim2" class="tblCenter">
+            <thead>
+                <tr class="trc">
+                    <th>Number</th>
+                    <th>Goals</th>
+                    <th>Assists</th>
+                    <th>Ejection drawn</th>
+                    <th>MVP score</th>
+                    <th>In game</th>
+                </tr>
+            </thead>
+
+            <tbody id="tblDataTim2">
+                
+            </tbody>
+        </table>
+        <div class="wrapper">
+        <a href="http://127.0.0.1:5500/MVP.html" target="_blank" onclick="mvpTblopened()" id="abtn">Top 3 MVPs</a>
+        <button id="btnSave" onclick="saveData()">Save</button>
+    </div></div>
+        <script  src="index.js"></script> 
+        <!-- <script type="module" src="index.js"></script>  -->
+        
+        
+        
+    </body>
+</html>
