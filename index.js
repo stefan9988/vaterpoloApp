@@ -13,7 +13,8 @@ var flag1=false
 var flag2=false
 var [milliseconds,seconds] = [0,0];
 var int = null;
-var speedData
+var speedDataq
+var speedData=[]
 const btnLoadFromFile = document.querySelector('#btnLoadFile')
 const t1 = document.getElementById('tblTim1')
 const t2 = document.getElementById('tblTim2')
@@ -316,7 +317,7 @@ function submitSave(){
     }else if(cbq4.checked){
         q=4
     }
-    speedData={
+    speedDataq={
         swim_speed:ss,
         tim:tim,
         player1:pl1,
@@ -736,7 +737,8 @@ function saveData() {
         players: players1,
         MVP: MVPSort()[0],
         playingTime: MVPSort()[4][2],
-        plTimeTop3:MVPSort()[4][0]
+        plTimeTop3:MVPSort()[4][0],
+
     }
     let tim2 = {
         tim_name: MVPSort()[3],
@@ -745,7 +747,7 @@ function saveData() {
         playingTime: MVPSort()[4][3],
         plTimeTop3:MVPSort()[4][1]
     }
-    let matchData = [tim1, tim2]
+    let matchData = [tim1, tim2,speedData]
 
     const textToBLOB = new Blob([JSON.stringify(matchData)], {
         type: 'text/plain'
@@ -811,6 +813,8 @@ function readTable(id) {
 
 function mvpTblopened() {
     var MVPs = MVPSort()
+    speedData.push(speedDataq)
+    MVPs.push(speedData)
     localStorage.setItem("MVPs", JSON.stringify(MVPs));
     //console.log(sessionStorage)
     window.open('http://127.0.0.1:5500/MVP.html', '_blank');
@@ -830,6 +834,7 @@ async function loadFromFile() {
 function updateTables(text) {
     var tim1 = text[0]
     var tim2 = text[1]
+    speedData=text[2]
 
     var tim1_name = tim1.tim_name
     var players1 = tim1.players
@@ -870,7 +875,7 @@ function updateTables(text) {
         document.getElementById('' + i).innerHTML = players2[i - 31].MVPScore;
     }
 
-    localStorage.setItem("MVPs", JSON.stringify([mvp1, mvp2, tim1_name, tim2_name,[plTimeTop3t1,plTimeTop3t2]]));
+    localStorage.setItem("MVPs", JSON.stringify([mvp1, mvp2, tim1_name, tim2_name,[plTimeTop3t1,plTimeTop3t2],speedData]));
     window.open('http://127.0.0.1:5500/MVP.html', '_blank');
 }
 

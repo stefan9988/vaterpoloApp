@@ -12,16 +12,16 @@
             <img src="resources\icons\icon-512.png" alt="water polo img" >
             <fieldset>
                 <legend>Which team got the ball:</legend>
-                <div>
-                <div>
+                <div class="float-container">
+                <div class="float-child">
                     <input type="radio" name="tim" id="cbtim1" checked>
                     <label for="tim1" id="cbltim1">Tim 1</label><br>
                     <input type="radio" name="tim" value=2 id="cbtim2">
                     <label for="tim2" id="cbltim2">Tim 2</label><br>
-                    <input type="text" placeholder="player 1" id="inppl1">
-                    <input type="text" placeholder="player 2" id="inppl2">
+                    <input type="text" placeholder="player 1" id="inppl1" class="inpspeed">
+                    <input type="text" placeholder="player 2" id="inppl2" class="inpspeed">
                 </div>
-                <div>
+                <div class="float-child">
                     <input type="radio" name="q" id="cbq1" checked>
                     <label for="q">Q1</label><br>
                     <input type="radio" name="q" id="cbq2">
@@ -31,11 +31,13 @@
                     <input type="radio" name="q" id="cbq4">
                     <label for="q">Q4</label><br>
                 </div>
-                <input type="submit" value="Save" onclick="submitSave()">
+                <button id="btnBp" onclick="btnBpClicked()">Swim speed</button>
+                <input type="submit" value="Save" onclick="submitSave()" class="inpspeed">
+                
             </div>
                 <!-- <input type="submit" value="Save"> -->
               </fieldset>
-              <div><button id="btnBp" onclick="btnBpClicked()">Swim speed</button></div>
+              
         </div>
         <!-- <form method="post">
             <input type="button" value="Send Email" onclick="sendEmail()"/>

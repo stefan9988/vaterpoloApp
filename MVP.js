@@ -23,7 +23,20 @@ function get() {
     let tim1_name = MVPs[2]
     let tim2_name = MVPs[3]
     let playingTime = MVPs[4]
-    console.log(playingTime)
+    
+    if(MVPs[5] !=null){
+        MVPs[5].forEach(speed => {
+            let ss=speed.swim_speed
+        let tim=speed.tim
+        let player1=speed.player1
+        let player2=speed.player2
+        let q=speed.quarter
+        loadSpeedTbl(tim,player1,player2,q,ss)
+        });
+        
+        
+    }
+    console.log(MVPs)
     loadMvpTbl(MVP1, mvpTbl1,0)
     loadMvpTbl(MVP2, mvpTbl2,0)
     loadMvpTbl(playingTime[0], timeTbl1,1)
@@ -54,13 +67,15 @@ function loadMvpTbl(mvp, oTable,v) {
     }
 }
 
-function loadSpeedTbl(tim,broj,cetvrina,brzina){
-    if(tim==0){
-        speedTbl1.rows[cetvrina].cells[0].innerHTML=broj
+function loadSpeedTbl(tim,igrac1,igrac2,cetvrina,brzina){
+    if(tim==1){
+        speedTbl1.rows[cetvrina].cells[0].innerHTML=igrac1
         speedTbl1.rows[cetvrina].cells[1].innerHTML=brzina
+        speedTbl2.rows[cetvrina].cells[0].innerHTML=igrac2
     }else{
-        speedTbl2.rows[cetvrina].cells[0].innerHTML=broj
+        speedTbl2.rows[cetvrina].cells[0].innerHTML=igrac2
         speedTbl2.rows[cetvrina].cells[1].innerHTML=brzina
+        speedTbl1.rows[cetvrina].cells[0].innerHTML=igrac1
     }
     
     // table.rows[cetvrina].cells[0].innerHTML=broj

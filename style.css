@@ -30,6 +30,38 @@ table{
 .r:nth-child(2n){
     background:  rgba( 255,255,255);
 }
+fieldset
+{
+  /* background-color:rgb(38, 169, 224); */
+  color: rgb(43,56,143);
+  padding:16px;	
+  font-size: large;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  border: 3px solid;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.float-child {
+    width: 40%;
+    float: left;
+    padding: 20px;
+    border: 1px solid ;
+}  
+
+.inpspeed{
+    display: block;
+    margin : 0 auto;
+}
+.inpspeed::placeholder {
+    font-weight: bold;
+    opacity: .65;
+    color:  rgb(43,56,143);
+    background-color: white;
+}
+
+#btnBp{
+    margin-top: 20px;
+}
 
 input{text-align: center;
     color: rgb(43,56,143);
@@ -46,7 +78,6 @@ input{text-align: center;
 button{
     margin-left: 15px;
     margin-right: 15px;
-    
     width: 170px;
     height: 30px;
     
