@@ -4,6 +4,8 @@ const timeTbl1 = document.querySelector('#tabelaPT1')
 const timeTbl2 = document.querySelector('#tabelaPT2')
 const speedTbl1 = document.querySelector('#tabelaSS1')
 const speedTbl2 = document.querySelector('#tabelaSS2')
+const attackTime1 = document.querySelector('#AttackTime1')
+const attackTime2 = document.querySelector('#AttackTime2')
 
 window.onload = () => {
     get()
@@ -33,7 +35,9 @@ function get() {
         let q=speed.quarter
         loadSpeedTbl(tim,player1,player2,q,ss)
         });
-        
+    if(MVPs[5]!= null && MVPs[6]!= null){
+        console.log(MVPs)
+    }       
         
     }
     console.log(MVPs)
@@ -44,6 +48,8 @@ function get() {
     //loadSpeedTbl(tim,broj,cetvrtina,brzina)
     document.querySelector('#h2Tim1').innerHTML = tim1_name;
     document.querySelector('#h2Tim2').innerHTML = tim2_name;
+    attackTime1.innerHTML=MVPs[6]
+    attackTime2.innerHTML=MVPs[7]
     //sessionStorage.clear()
 }
 

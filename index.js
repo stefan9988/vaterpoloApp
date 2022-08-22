@@ -11,10 +11,14 @@ var refreshint2
 var flag=false
 var flag1=false
 var flag2=false
+var fl20tim1=false
+var fl20tim2=false
 var [milliseconds,seconds] = [0,0];
 var int = null;
 var speedDataq
 var speedData=[]
+var tim1attacktime=0
+var tim2attacktime=0
 const btnLoadFromFile = document.querySelector('#btnLoadFile')
 const t1 = document.getElementById('tblTim1')
 const t2 = document.getElementById('tblTim2')
@@ -37,6 +41,8 @@ const cbq2=document.getElementById('cbq2')
 const cbq3=document.getElementById('cbq3')
 const cbq4=document.getElementById('cbq4')
 const btnSwimSpeed=document.getElementById('btnBp')
+const fieldset=document.getElementById('fieldset')
+const attackTimer=document.getElementById('timerAttack')
 // import  {connection} from "/sql.js";
 
 let tim1data = [{
@@ -174,6 +180,22 @@ let tim2data = [{
 ]
 
 function btn1clicked() {
+    let ta= document.getElementById("timerAttack").innerHTML.split(':')
+    if(fl20tim2){
+        tim2attacktime=tim2attacktime+20-parseInt(ta[1])
+        console.log('srbija')
+        console.log(tim2attacktime)
+        fl20tim2=false
+    }else if(!fl20tim2){
+        tim2attacktime=tim2attacktime+30-parseInt(ta[1])
+        console.log('srbija')
+        console.log(tim2attacktime)
+        fl20tim2=false
+    }
+    
+    clearInterval(refreshint1)
+    startTimer1(30,'timerAttack')
+    
     document.querySelector('#btnTim1').disabled = true
     document.querySelector('#btnTim2').disabled = false
 
@@ -184,6 +206,22 @@ function btn1clicked() {
 }
 
 function btn2clicked() {
+    let ta= document.getElementById("timerAttack").innerHTML.split(':')
+    if(fl20tim1){
+        tim1attacktime=tim1attacktime+20-parseInt(ta[1])
+        console.log('Hungary')
+        console.log(tim1attacktime)
+        fl20tim1=false
+    }else if(!fl20tim1){
+        tim1attacktime=tim1attacktime+30-parseInt(ta[1])
+        console.log('Hungary')
+        console.log(tim1attacktime)
+        fl20tim1=false
+    }
+    
+    clearInterval(refreshint1)
+    startTimer1(30,'timerAttack')
+
     document.querySelector('#btnTim2').disabled = true
     document.querySelector('#btnTim1').disabled = false
 
@@ -226,7 +264,7 @@ function startTimer1(duration,id) {
         minutes = parseInt(timer / 60, 10);
         seconds = parseInt(timer % 60, 10);
         
-        minutes = minutes < 10 ? "0" + minutes : minutes;
+        // minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
        
         var display = document.getElementById(id);
@@ -256,6 +294,21 @@ function startTimer2(duration,id) {
     }, 1000);
 }
 
+function btnStart20Clicked(){
+    let ta= document.getElementById("timerAttack").innerHTML.split(':')
+    if(t5.disabled){
+        tim1attacktime=tim1attacktime+30-parseInt(ta[1])
+        fl20tim1=true
+        console.log(tim1attacktime)
+    }else if(t6.disabled){
+        tim2attacktime=tim2attacktime+30-parseInt(ta[1])
+        fl20tim2=true
+        console.log(tim2attacktime)
+    }
+    btnStartClicked()
+    clearInterval(refreshint1)
+    startTimer1( 20,'timerAttack')
+}
 
 function btnStartClicked(){
     document.querySelector('#btnStart').disabled = true
@@ -266,9 +319,11 @@ function btnStartClicked(){
         flag=true
     }else if(flag){
         clearInterval(refreshint)
+        clearInterval(refreshint1)
         let t= document.getElementById("timer").innerHTML.split(':')
-        //console.log()
+        let ta= document.getElementById("timerAttack").innerHTML.split(':')
         startTimer(60*parseInt( t[0])+parseInt( t[1])-2,'timer')
+        startTimer1(parseInt( ta[1])-2,'timerAttack')
     }
     if(int!==null){
         clearInterval(int);
@@ -287,6 +342,7 @@ function btnStopClicked(){
     document.querySelector('#btnStart').disabled = false
     document.querySelector('#btnStop').disabled = true
     clearInterval(refreshint)
+    clearInterval(refreshint1)
 }
 
 function btnRestartClicked(){
@@ -399,9 +455,6 @@ function btnBp2Clicked(){
     startTimer2(20,'timer2')
     flag2=true
 }
-var attackTimeT1=0
-var attackTimeT2=0
-
 
 function startDisappear() {
 
@@ -417,6 +470,7 @@ function startDisappear() {
     t10.style.display = 'none'
     t11.style.display = 'none'
     t12.style.display = 'none'
+    fieldset.style.display = 'none'
 
 }
 
@@ -738,6 +792,7 @@ function saveData() {
         MVP: MVPSort()[0],
         playingTime: MVPSort()[4][2],
         plTimeTop3:MVPSort()[4][0],
+        attackTime: tim1attacktime
 
     }
     let tim2 = {
@@ -745,7 +800,8 @@ function saveData() {
         players: players2,
         MVP: MVPSort()[1],
         playingTime: MVPSort()[4][3],
-        plTimeTop3:MVPSort()[4][1]
+        plTimeTop3:MVPSort()[4][1],
+        attackTime: tim2attacktime
     }
     let matchData = [tim1, tim2,speedData]
 
@@ -756,7 +812,7 @@ function saveData() {
     var today = new Date();
     var date = today.getDate() + '_' + (today.getMonth() + 1) + '_' + today.getFullYear()
     var time = today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds();
-    var dateTime = MVPSort()[2] + '_' + MVPSort()[3] + '_' + date + '_' + time;
+    var dateTime = MVPSort()[2] + '_' + MVPSort()[3] + '_' + date //+ '_' + time;
 
     const sFileName = dateTime;
 
@@ -813,8 +869,12 @@ function readTable(id) {
 
 function mvpTblopened() {
     var MVPs = MVPSort()
-    speedData.push(speedDataq)
+    if(speedDataq!=null){
+        speedData.push(speedDataq)
+    }
     MVPs.push(speedData)
+    MVPs.push(tim1attacktime)
+    MVPs.push(tim2attacktime)
     localStorage.setItem("MVPs", JSON.stringify(MVPs));
     //console.log(sessionStorage)
     window.open('http://127.0.0.1:5500/MVP.html', '_blank');
@@ -841,12 +901,14 @@ function updateTables(text) {
     var mvp1 = tim1.MVP
     var playingTime1=tim1.playingTime
     var plTimeTop3t1=tim1.plTimeTop3
+    var tim1attacktime=tim1.attackTime
 
     var tim2_name = tim2.tim_name
     var players2 = tim2.players
     var mvp2 = tim2.MVP
     var playingTime2=tim2.playingTime
     var plTimeTop3t2=tim2.plTimeTop3
+    var tim2attacktime=tim2.attackTime
 
     //tim 1
     document.querySelector('#btnTim1').innerHTML = tim1_name;
@@ -875,7 +937,8 @@ function updateTables(text) {
         document.getElementById('' + i).innerHTML = players2[i - 31].MVPScore;
     }
 
-    localStorage.setItem("MVPs", JSON.stringify([mvp1, mvp2, tim1_name, tim2_name,[plTimeTop3t1,plTimeTop3t2],speedData]));
+    localStorage.setItem("MVPs", JSON.stringify([mvp1, mvp2, tim1_name, tim2_name,[plTimeTop3t1,plTimeTop3t2],speedData,
+        tim1attacktime,tim2attacktime]));
     window.open('http://127.0.0.1:5500/MVP.html', '_blank');
 }
 
@@ -933,7 +996,7 @@ function next1() {
         t6.innerHTML = t4.value
         cbltim1.innerHTML=t3.value
         cbltim2.innerHTML=t4.value
-
+        fieldset.style.display = 'block'
         t3.style.display = 'none'
         t4.style.display = 'none'
         t9.style.display = 'none'
@@ -945,87 +1008,6 @@ function next1() {
     }
 }
 
-// function inputPlayersNumbers() {
-//     t10.style.display = 'inline'
-//     t11.style.display = 'inline'
-//     t12.style.display = 'inline'
-//     for (let i = 1; i < 14; i++) {
-//         //tabela 1
-//         let row = t10.insertRow();
-//         row.classList.add('r')
-
-//         let num = row.insertCell(0);
-//         num.appendChild(createInputNum('inNumT1' + i, i))
-
-//         let num1 = row.insertCell(1);
-//         num1.appendChild(createInputNum('inNumT2' + i, i))
-//     }
-// }
-
-// function createInputNum(id, i) {
-//     let inputField = document.createElement('input')
-//     inputField.setAttribute('type', 'number')
-//     inputField.setAttribute('min', 0);
-//     //inputField.setAttribute('value', 0);
-//     inputField.setAttribute('id', id)
-//     inputField.setAttribute('class', 'inNum')
-//     inputField.setAttribute('placeholder', 'Enter player ' + i + ' number')
-//     return inputField
-// }
-
-// function next2() {
-//     let numt1 = []
-//     let numt2 = 0;
-
-//     document.querySelectorAll('#tblplnum1 input[class="inNum"]')
-//         .forEach(x => {
-//             numt1.push(x.value)
-//         });
-//     numt1.forEach(element =>
-//         numt2 = element == '' ? numt2 : numt2 += 1);
-    
-//     if (numt2 == 26 && compare(numt1)) {
-//         initializeTable('tblTim1')
-//         initializeTable('tblTim2')
-//         loadAppear()
-//         t6.disabled = false
-//         for (let i = 11; i < 24; i++) {
-//             document.querySelector('#br' + i).innerHTML = numt1[(i - 11) * 2]
-//         }
-//         for (let i = 31; i < 44; i++) {
-//             document.querySelector('#br' + i).innerHTML = numt1[(i - 31) * 2 + 1]
-//         }
-//     } else {
-//         alert("Please Fill All Required Fields");
-//     }
-// }
-
-// function compare(niz){
-//     let niz1=[]
-//     let niz2=[]
-//     let n1=0
-//     let n2=0
-//     for (let i = 0; i < 13; i++) {
-//         niz1.push(niz[i*2])
-//         niz2.push(niz[(i*2+1)])
-//     }
-//     niz1=niz1.sort()
-//     niz2=niz2.sort()
-//     for (let i = 0; i < 12; i++) {
-//         if(niz1[i]!=niz1[i+1]){
-//             n1+=1
-//         }
-//         if(niz2[i]!=niz2[i+1]){
-//             n2+=1
-//         }
-//     }
-//     if (n1==12 && n2==12){
-//         return true
-//     }else{
-//         alert('Numbers cant be same')
-//         return false
-//     }
-// }
 
 function initializeTable(id) {
     let tbl = document.querySelector('#' + id)
@@ -1055,7 +1037,3 @@ function initializeTable(id) {
 
 
 
-//  let s = seconds < 10 ? "0" + seconds : seconds;
-//  let ms = milliseconds < 10 ? "00" + milliseconds : milliseconds < 100 ? "0" + milliseconds : milliseconds;
-
-//  timerRef.innerHTML = ` ${s} : ${ms}`;

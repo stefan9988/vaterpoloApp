@@ -10,7 +10,7 @@
         <h1>Water polo App</h1>
         <div class="div-inline">
             <img src="resources\icons\icon-512.png" alt="water polo img" >
-            <fieldset>
+            <fieldset id="fieldset">
                 <legend>Which team got the ball:</legend>
                 <div class="float-container">
                 <div class="float-child">
@@ -47,10 +47,14 @@
             <button id="btnCreateFile" onclick="createNewGame()">Create new game</button>
             
         <div id="dd">
-            <p id=timer>08:00</p>
+            <div>
+                <p id=timer>08:00</p>
+                <p id=timerAttack>0:30</p>
+            </div>
             <button id="btnStart" onclick="btnStartClicked()">Start</button>
             <button id="btnStop" onclick="btnStopClicked()">Stop</button>
             <button id="btnRestart" onclick="btnRestartClicked()">Restart</button>
+            <button id="btnStart20" onclick="btnStart20Clicked()">Start 20</button>
             <!-- <input type="text" id="inpSpeed"> -->
         </div>
         <div class="wrapper">
