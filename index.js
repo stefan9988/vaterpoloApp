@@ -239,6 +239,63 @@ window.onload = () => {
     
 }
 
+async function myfunction_clickevent(){
+    const res = await fetch('talk_to_me.txt');
+    const text = await res.text();
+    let line=text.split("\r\n")
+    let length=line.length
+    let last=line[length-2].split(' ')
+    let number=last[0]
+    let team=last[1]
+    let action=last[2]
+    number=seeIfNan(number)
+    action=actionToNum(action)
+    if (last[1]==='white'){
+        number=number+10
+        id='pbtn'+number.toString()+action
+        console.log(id)
+        btnclicked(id)
+    }
+    else if (last[1]==='dark'){
+        number=number+30
+        id='pbtn'+number.toString()+action
+        console.log(id)
+        btnclicked(id)
+    }
+    
+}
+
+function seeIfNan(number){
+    let numberd = {
+        'one': 1,
+        'two': 2,
+        'three': 3,
+        'four': 4,
+        'five': 5,
+        'six': 6,
+        'seven': 7,
+        'eight': 8,
+        'nine': 9,
+        'ten': 10,
+        'eleven': 11,
+        'twelve': 12,
+        'thirteen': 13}
+    if(isNaN(parseInt(number))){
+        number=numberd[number]
+    }
+    return parseInt(number)
+}
+
+function actionToNum(action){
+    let actiond = {
+        'goal': 'g',
+        'assist': 'a',
+        'ejection': 'e'
+        }
+        action=actiond[action]
+        return action
+}
+
 function startTimer(duration,id) {
     var timer = duration, minutes, seconds;
     refreshint= setInterval(function () {
@@ -502,6 +559,7 @@ function createButttonEl(id,znak) {
 
 
 function btnclicked(id){
+    // console.log(id)
     const lastDigit2Str = String(id).slice(-1);
     const firstDig = id.slice(0, -1).slice(-2)
 
@@ -555,7 +613,7 @@ function btnclicked(id){
         document.getElementById(firstDig).innerHTML = MVPScoreCalculator(g, a, e) 
     }
     else {
-        alert('nesto nije dobro index.js 66')
+        alert('nesto nije dobro index.js')
     }
     var MVPs = MVPSort()
     localStorage.clear()
