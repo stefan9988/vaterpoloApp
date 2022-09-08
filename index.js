@@ -183,13 +183,13 @@ function btn1clicked() {
     let ta= document.getElementById("timerAttack").innerHTML.split(':')
     if(fl20tim2){
         tim2attacktime=tim2attacktime+20-parseInt(ta[1])
-        console.log('srbija')
-        console.log(tim2attacktime)
+        //console.log('srbija')
+        //console.log(tim2attacktime)
         fl20tim2=false
     }else if(!fl20tim2){
         tim2attacktime=tim2attacktime+30-parseInt(ta[1])
-        console.log('srbija')
-        console.log(tim2attacktime)
+        //console.log('srbija')
+        //console.log(tim2attacktime)
         fl20tim2=false
     }
     
@@ -209,13 +209,13 @@ function btn2clicked() {
     let ta= document.getElementById("timerAttack").innerHTML.split(':')
     if(fl20tim1){
         tim1attacktime=tim1attacktime+20-parseInt(ta[1])
-        console.log('Hungary')
-        console.log(tim1attacktime)
+        //console.log('Hungary')
+        //console.log(tim1attacktime)
         fl20tim1=false
     }else if(!fl20tim1){
         tim1attacktime=tim1attacktime+30-parseInt(ta[1])
-        console.log('Hungary')
-        console.log(tim1attacktime)
+        //console.log('Hungary')
+        //console.log(tim1attacktime)
         fl20tim1=false
     }
     
@@ -253,13 +253,13 @@ async function myfunction_clickevent(){
     if (last[1]==='white'){
         number=number+10
         id='pbtn'+number.toString()+action
-        console.log(id)
+        //console.log(id)
         btnclicked(id)
     }
     else if (last[1]==='dark'){
         number=number+30
         id='pbtn'+number.toString()+action
-        console.log(id)
+        //console.log(id)
         btnclicked(id)
     }
     
@@ -356,11 +356,11 @@ function btnStart20Clicked(){
     if(t5.disabled){
         tim1attacktime=tim1attacktime+30-parseInt(ta[1])
         fl20tim1=true
-        console.log(tim1attacktime)
+        //console.log(tim1attacktime)
     }else if(t6.disabled){
         tim2attacktime=tim2attacktime+30-parseInt(ta[1])
         fl20tim2=true
-        console.log(tim2attacktime)
+        //console.log(tim2attacktime)
     }
     btnStartClicked()
     clearInterval(refreshint1)
@@ -497,7 +497,7 @@ function btnStop2Clicked(){
     clearInterval(refreshint2)
     let t= document.getElementById("timer2").innerHTML.split(':')
     attackTimeT2=attackTimeT2+30-parseInt(t[1])
-    console.log(attackTimeT2)
+    //console.log(attackTimeT2)
 }
 
 function btnRestart2Clicked(){
@@ -660,7 +660,7 @@ function createTable(personData, i, id) {
             let t= document.getElementById("timer").innerHTML.split(':')
             let sek=60*parseInt(t[0])+parseInt(t[1])
             player = getPLayer(played.id)
-            console.log(player)
+            //console.log(player)
              if(!player)
              {
                 player = {id: played.id, usao:0, izasao: 0}
@@ -800,7 +800,7 @@ function getPlayingTime(){
 
 function MVPSort() {
     let plTime=getPlayingTime()
-    console.log(plTime)
+    //console.log(plTime)
     //sortiranje prvog tima
     //kljuc je broj igraca, vrednost je MVP score
     let dic1 = {}

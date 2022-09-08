@@ -48,8 +48,12 @@ function get() {
     //loadSpeedTbl(tim,broj,cetvrtina,brzina)
     document.querySelector('#h2Tim1').innerHTML = tim1_name;
     document.querySelector('#h2Tim2').innerHTML = tim2_name;
-    attackTime1.innerHTML=MVPs[6]
-    attackTime2.innerHTML=MVPs[7]
+    let minutes1 = Math.floor(MVPs[6] / 60);
+    let seconds1 = MVPs[6] % 60;
+    let minutes2 = Math.floor(MVPs[7] / 60);
+    let seconds2 = MVPs[7] % 60;
+    attackTime1.innerHTML='Attack time: '+ minutes1 + ' min ' + seconds1 + ' sec'
+    attackTime2.innerHTML='Attack time: '+ minutes2 + ' min ' + seconds2 + ' sec'
     //sessionStorage.clear()
 }
 
